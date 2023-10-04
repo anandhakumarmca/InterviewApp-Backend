@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 export function getUserByEmail(request){
     return User.findOne({
         email: request.body.email,
-    }).timeout(20000);
+    });
 }
 
 export function getUserById(id){
