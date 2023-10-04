@@ -1,15 +1,18 @@
 import mongoose from "mongoose";
 
-export function dataBaseConnection(){
-    const params ={
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            connectTimeoutMS: 30000,
-    }
+export async function dataBaseConnection() {
+    const params = {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        connectTimeoutMS: 30000,
+    };
+
     try {
-        mongoose.connect( process.env.MONGO_URL, params);
-        console.log("MongoDB connected sucessfully");   
-    }catch(error){
-        console.log("MongoDB Connection Failed",error);
+        await mongoose.connect(process.env.MONGO_URL, params);
+        console.log("MongoDB connected successfully");
+    } catch (error) {
+        console.error("MongoDB Connection Failed", error);
+        // You might want to throw the error again or handle it accordingly
+        throw error;
     }
 }
